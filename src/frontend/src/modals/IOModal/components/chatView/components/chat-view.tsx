@@ -1,3 +1,4 @@
+import SinnEmblem from "@/assets/SinnEmblemBlack.svg?react";
 import LangflowLogo from "@/assets/LangflowLogo.svg?react";
 import { TextEffectPerChar } from "@/components/ui/textAnimation";
 import { ENABLE_IMAGE_ON_PLAYGROUND } from "@/customization/feature-flags";
@@ -251,8 +252,8 @@ export default function ChatView({
             <>
               <div className="flex h-full w-full flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center gap-4 p-8">
-                  <LangflowLogo
-                    title="Langflow logo"
+                  <SinnEmblem
+                    title="SINN logo"
                     className="h-10 w-10 scale-[1.5]"
                   />
                   <div className="flex flex-col items-center justify-center">
