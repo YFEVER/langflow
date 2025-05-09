@@ -20,5 +20,8 @@ FROM langflowai/langflow:latest
 # Langflow serves static files from /app/src/backend/base/langflow/frontend
 COPY --from=frontend-builder /app/frontend/build/ /app/src/backend/base/langflow/frontend/
 
+# Set env var to force backend to serve the copied frontend path
+ENV LANGFLOW_FRONTEND_PATH=/app/src/backend/base/langflow/frontend
+
 # Default entrypoint (unchanged)
 ENTRYPOINT ["python", "-m", "langflow", "run"]
