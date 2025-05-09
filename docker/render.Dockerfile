@@ -1,11 +1,24 @@
+# -------- Stage 1: build the customised React frontend --------
+FROM node:lts-bookworm AS frontend-builder
+
+# Set workdir inside the builder image
+WORKDIR /app/frontend
+
+# Copy frontend sources
+COPY src/frontend/package*.json ./
+RUN npm ci --prefer-offline --no-audit --progress=false
+COPY src/frontend .
+
+# Build the production bundle
+RUN npm run build
+
+
+# -------- Stage 2: final runtime image --------
 FROM langflowai/langflow:latest
 
-# Copy custom frontend sources into the image
-COPY src/frontend /app/frontend
+# Overwrite the bundled frontend with our freshly-built assets
+# Langflow serves static files from /app/backend/base/langflow/frontend
+COPY --from=frontend-builder /app/frontend/build/ /app/backend/base/langflow/frontend/
 
-# Re-install JS dependencies and rebuild the production bundle
-RUN cd /app/frontend \
-    && npm ci --prefer-offline --no-audit --progress=false \
-    && npm run build
-
+# Default entrypoint (unchanged)
 ENTRYPOINT ["python", "-m", "langflow", "run"]
