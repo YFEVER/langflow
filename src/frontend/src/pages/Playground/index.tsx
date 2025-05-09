@@ -59,7 +59,13 @@ export default function PlaygroundPage() {
   }, []);
 
   useEffect(() => {
-    document.title = currentSavedFlow?.name || "Langflow";
+    if (playgroundPage) {
+      document.title = currentSavedFlow?.name || "SINN";
+    }
+  }, [currentSavedFlow, playgroundPage]);
+
+  useEffect(() => {
+    document.title = currentSavedFlow?.name || "SINN";
     if (currentSavedFlow?.data) {
       const { inputs, outputs } = getInputsAndOutputs(
         currentSavedFlow?.data?.nodes || [],
