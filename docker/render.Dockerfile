@@ -17,8 +17,8 @@ RUN npm run build
 FROM langflowai/langflow:latest
 
 # Overwrite the bundled frontend with our freshly-built assets
-# Langflow serves static files from /app/backend/base/langflow/frontend
-COPY --from=frontend-builder /app/frontend/build/ /app/backend/base/langflow/frontend/
+# Langflow serves static files from /app/src/backend/base/langflow/frontend
+COPY --from=frontend-builder /app/frontend/build/ /app/src/backend/base/langflow/frontend/
 
 # Default entrypoint (unchanged)
 ENTRYPOINT ["python", "-m", "langflow", "run"]
