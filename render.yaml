@@ -11,7 +11,7 @@ services:
     autoDeploy: false
     envVars:
       - key: LANGFLOW_DATABASE_URL
-        value: sqlite:////app/data/.cache/langflow/langflow.db
+        # Value will be set in Render dashboard
       - key: LANGFLOW_HOST
         value: 0.0.0.0
       - key: LANGFLOW_PORT
@@ -19,6 +19,3 @@ services:
         value: 10000
       - key: LANGFLOW_LOG_LEVEL
         value: INFO
-    disk:
-      name: langflow-data
-      mountPath: /app/data
